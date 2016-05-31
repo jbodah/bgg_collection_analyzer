@@ -1,0 +1,19 @@
+#! /usr/bin/env ruby
+
+@lib = File.expand_path('../../lib', __FILE__)
+$: << @lib
+
+require 'bundler/setup'
+require 'pp'
+require 'awesome_print'
+require 'irb'
+require 'irb/completion'
+require 'bgg_collection_analyzer'
+
+def reload!
+  Dir[File.join(@lib, '**/*.rb')].map { |f| load f }
+end
+
+ENV['SHORT_INSPECT'] = 'true'
+
+IRB.start
