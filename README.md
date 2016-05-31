@@ -1,41 +1,46 @@
 # BggCollectionAnalyzer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bgg_collection_analyzer`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'bgg_collection_analyzer'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install bgg_collection_analyzer
+a collection analyzer for boardgamegeeks users
 
 ## Usage
 
-TODO: Write usage instructions here
+This gem provides an easy to use interface for querying your collection.
+For example, I can find all of the games that I own that have a medium
+weight and are recommended with two, and then I can sort those by my rating
+(note: `nil.to_i => 0` and represents unrated games):
 
-## Development
+```rb
+bin/console
+irb> pp collection.owned.board_game.recommended_with_two.medium.map { |g| [g.user_rating.to_i, g.name] }.sort_by(&:first).reverse
+[[10, "Ghost Stories"],
+ [9, "Freedom: The Underground Railroad"],
+ [9, "Pandemic Legacy: Season 1"],
+ [9, "Suburbia"],
+ [8, "Race for the Galaxy"],
+ [8, "Dominion"],
+ [8, "Gears of War: The Board Game"],
+ [7, "Seasons"],
+ [7, "Hive"],
+ [7, "Hawaii"],
+ [7, "Ristorante Italia"],
+ [7, "Epic Card Game"],
+ [7, "Mottainai"],
+ [7, "Innovation"],
+ [6, "Thunderstone Advance: Numenera"],
+ [6, "Pandemic"],
+ [3, "Space Hulk: Death Angel – The Card Game"],
+ [0, "Thunderstone Advance: Towers of Ruin"],
+ [0, "Targi"],
+ [0, "Sherlock Holmes Consulting Detective"],
+ [0, "Seeland"],
+ [0, "Poseidon's Kingdom"],
+ [0, "Legacy: Gears of Time"],
+ [0, "Istanbul"],
+ [0, "Horse Fever"],
+ [0, "Glory to Rome"],
+ [0, "Empire Builder"],
+ [0, "Copycat"]]
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bgg_collection_analyzer.
-
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
+Take a peek at `BggCollectionAnalyzer`, `Bgg::Result::Collection::Item`, and
+`Bgg::Game` for more options
